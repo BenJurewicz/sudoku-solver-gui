@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 // external crates
 use dioxus::prelude::*;
 use dioxus_logger::tracing::{info, Level};
@@ -7,14 +5,10 @@ use dioxus_logger::tracing::{info, Level};
 mod tile;
 use tile::Tile;
 
-fn main() {
-    // Init logger
-    dioxus_logger::init(Level::INFO).expect("failed to init logger");
-    info!("starting app");
+const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
 
-    let cfg = dioxus::desktop::Config::new()
-        .with_custom_head(r#"<link rel="stylesheet" href="assets/tailwind.css">"#.to_string());
-    LaunchBuilder::desktop().with_cfg(cfg).launch(App);
+fn main() {
+    dioxus::launch(App);
 }
 
 /*
@@ -51,6 +45,8 @@ fn App() -> Element {
     let mut test = use_signal(|| None::<u8>);
 
     rsx! {
+        document::Link { rel: "stylesheet", href: TAILWIND_CSS }
+
         div { class: "grid grid-rows-9 grid-cols-9",
             for _ in 0..(9*9) {
                 // Tile { value: board[i / 9][i % 9] }
