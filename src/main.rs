@@ -47,15 +47,15 @@ fn App() -> Element {
     rsx! {
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
 
-        div { class: "grid grid-rows-9 grid-cols-9",
-            for _ in 0..(9*9) {
-                // Tile { value: board[i / 9][i % 9] }
-                Tile {
-                    value: test(),
-                    oninput: move |e : FormEvent| {
-                        test.set(Some (e.value().pop().unwrap_or('0').to_digit(10).unwrap_or(0) as u8));
-                    }
-                }
+        div {
+            class: "",
+            for y in 0..9 {
+                tr{ for x in 0..9 {
+                    // Tile { value: board[i / 9][i % 9] }
+                    th {Tile {
+                        value: test,
+                    }}
+                }}
             }
         }
     }
