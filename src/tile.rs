@@ -32,7 +32,7 @@ pub fn Tile(board: Signal<[[Option<u8>; 9]; 9]>, focused:Signal<Option<(usize, u
     rsx! {
         div {
             tabindex: "0",
-            class: format!("font-sans font-medium flex items-center justify-center w-12 h-12 hover:bg-gray-300 focus:bg-gray-400 {}",
+            class: format!("font-sans font-medium flex items-center justify-center w-12 h-12 hover:bg-gray-300 focus:bg-gray-400 active:bg-gray-500 {}",
                 if focus_neighbour {"bg-gray-200"} else {""}),
             onkeydown: handleInput,
             onclick: move |e| {

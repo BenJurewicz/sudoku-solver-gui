@@ -39,7 +39,6 @@ General idea for handling the sudoku state
                 }
         }
 */
-
 #[component]
 fn App() -> Element {
     let mut board = use_signal(|| [[Some::<u8>(2); 9]; 9]);
@@ -53,13 +52,13 @@ fn App() -> Element {
             class: "flex justify-center items-center h-screen flex-col",
             //TODO: Extract the table into a separate component called board
             table {
-            class: "border-collapse border-solid border-4 border-black",
+            class: "border-collapse border-solid border-3 border-black",
             for y in 0..9 {
                 tr{ for x in 0..9 {
                     th {
                         class: format!("p-0 border-solid border {x} {y}",
-                                x=if x%3 == 0 && x != 0 {"border-l-4"} else {""},
-                                y=if y%3 == 0 && y != 0 {"border-t-4"} else {""}),
+                                x=if x%3 == 0 && x != 0 {"border-l-3"} else {""},
+                                y=if y%3 == 0 && y != 0 {"border-t-3"} else {""}),
                         Tile {
                             board: board,
                             focused: focused,
@@ -70,19 +69,19 @@ fn App() -> Element {
                 }
             }
             div {
-                // TODO style using flex gap so the buttons have equal widht
+                // TODO style using flex gap so the buttons have equal width
                 button {
-                    class: "text-xl rounded-lg bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 m-2 border-solid border-green-800 border-2",
+                    class: "text-xl rounded-lg bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-2 px-3 m-2 border-solid border-green-800 border-2",
                     "Check"
                 }
                 button {
-                    class: "text-xl rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 m-2 border-solid border-blue-800 border-2",
+                    class: "text-xl rounded-lg bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-4 m-2 border-solid border-blue-800 border-2",
                     "Solve"
                 }
 
                 button {
                     // todo add a popup with "Are you sure you want to clear the board?" and a button to confirm
-                    class: "text-xl rounded-lg bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 m-2 border-solid border-red-800 border-2",
+                    class: "text-xl rounded-lg bg-red-500 hover:bg-red-600 active:bg-red-700 text-white font-bold py-2 px-4 m-2 border-solid border-red-800 border-2",
                     onclick: move |_| {
                         board.set( [[None; 9]; 9]);
                     },
