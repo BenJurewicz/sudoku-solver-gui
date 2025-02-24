@@ -1,4 +1,8 @@
-# Development
+# Sudoku game and solver
+## Description
+A small gui sudoku game and solver written in Rust using Dioxus and Tailwind CSS.
+
+## Development
 
 1. Install npm: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 2. Install the tailwind css cli: https://tailwindcss.com/docs/installation
