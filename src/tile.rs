@@ -32,10 +32,14 @@ pub fn Tile(board: Signal<[[Option<u8>; 9]; 9]>, focused:Signal<Option<(usize, u
     rsx! {
         div {
             tabindex: "0",
-            class: format!("font-sans font-medium flex items-center justify-center w-12 h-12 hover:bg-gray-300 focus:bg-gray-400 active:bg-gray-500 {}",
+            // We want the board to take up around 2/3 of the screen and sudoku grid is 9x9 so:
+            // x * 9 / 100 = 2/3
+            // x = 7,4 ≈ 2/3 * 100/9
+            class: format!("size-[9vmin] sm:size-[7.4vmin] flex items-center justify-center font-stretch-100% hover:bg-gray-300 active:bg-gray-500 focus:bg-gray-400 focus:font-semibold {}",
                 if focus_neighbour {"bg-gray-200"} else {""}),
             onkeydown: handleInput,
             onclick: move |e| {
+                // Prevents the item from being unfocused by onclick handler in root div
                 e.stop_propagation();
                 focused.set(Some((x, y)));
             },
