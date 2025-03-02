@@ -5,7 +5,6 @@ use dioxus_logger::tracing::info;
 use crate::sudoku::Sudoku;
 
 #[component]
-// pub fn Tile(board: Signal<[[Option<u8>; 9]; 9]>, focused:Signal<Option<(usize, usize)>>, x: usize, y: usize) -> Element {
 pub fn Tile(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>, x: usize, y: usize) -> Element {
     let handleInput = move |e : KeyboardEvent| {
         if let Key::Character(c) = e.key() {
