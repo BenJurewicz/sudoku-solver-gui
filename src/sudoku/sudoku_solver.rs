@@ -2,9 +2,9 @@ use std::array::from_fn;
 use std::collections::HashSet;
 use std::num::NonZeroU8;
 
-use crate::cell::Cell;
-use crate::point::Point;
-pub use crate::sudoku_errors::*;
+use super::cell::Cell;
+use super::point::Point;
+use super::sudoku_errors::*;
 
 // type Sudoku = Vec<Vec<Cell>>;
 type Sudoku = [[Cell; 9]; 9];

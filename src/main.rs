@@ -6,6 +6,9 @@ use dioxus_logger::tracing::{info, Level};
 mod tile;
 use tile::Tile;
 
+mod sudoku;
+use sudoku::Sudoku;
+
 const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
 
 fn main() {
@@ -14,7 +17,8 @@ fn main() {
 
 #[component]
 fn App() -> Element {
-    let mut board = use_signal(|| [[Some::<u8>(2); 9]; 9]);
+    // let mut board = use_signal(|| [[Some::<u8>(2); 9]; 9]);
+    let mut board = use_signal(|| Sudoku::new_puzzle(60));
     let mut focused = use_signal(|| None::<(usize, usize)>);
 
     rsx! {
@@ -46,7 +50,10 @@ fn App() -> Element {
                 class: "flex justify-center flex-wrap m-2 md:m-4 lg:m-6",
                 button {
                     class: "text-xl bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-2 px-3 m-2 border-solid border-green-800 border-2 rounded-lg",
-                    "Check"
+                    onclick: move |_| {
+                        board.set(Sudoku::new_puzzle(60));
+                    },
+                    "New"
                 }
                 button {
                     class: "text-xl bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-4 m-2 border-solid border-blue-800 border-2 rounded-lg",
@@ -57,7 +64,8 @@ fn App() -> Element {
                     popovertarget: "clear-board-conformation",
                     class: "text-xl bg-red-500 hover:bg-red-600 active:bg-red-700 text-white font-bold py-2 px-4 m-2 border-solid border-red-800 border-2 rounded-lg",
                     onclick: move |_| {
-                        board.set( [[None; 9]; 9]);
+                        board.write().clear();
+                        focused.set(None);
                     },
                     "Clear"
                 }

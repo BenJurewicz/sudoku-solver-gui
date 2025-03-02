@@ -2,9 +2,9 @@ use rand::prelude::SliceRandom;
 use std::collections::HashSet;
 use std::num::NonZeroU8;
 
-use crate::point::Point;
-use crate::sudoku_errors::ErrorNoSolution;
-use crate::sudoku_solver::SudokuSolver;
+use super::point::Point;
+pub use super::sudoku_errors::ErrorNoSolution;
+use super::sudoku_solver::SudokuSolver;
 
 type SudokuBoard = [[Option<NonZeroU8>; 9]; 9];
 
@@ -66,16 +66,28 @@ impl Sudoku {
         read_only
     }
 
-    pub fn get_cell(&self, point: Point<usize>) -> Option<NonZeroU8> {
-        self.board[point.y][point.x]
+    pub fn get_cell(&self, x: usize, y: usize) -> Option<NonZeroU8> {
+        self.board[y][x]
     }
 
-    pub fn set_cell(&mut self, point: Point<usize>, value: NonZeroU8) {
-        self.board[point.y][point.x] = Some(value);
+    pub fn set_cell(&mut self, x: usize, y: usize, value: Option<NonZeroU8>) {
+        if !self.read_only[y][x] {
+            self.board[y][x] = value;
+        }
     }
 
-    pub fn is_read_only(&self, point: Point<usize>) -> bool {
-        self.read_only[point.y][point.x]
+    pub fn is_read_only(&self, x: usize, y: usize) -> bool {
+        self.read_only[y][x]
+    }
+
+    pub fn clear(&mut self) {
+        for y in 0..9 {
+            for x in 0..9 {
+                if !self.read_only[y][x] {
+                    self.board[y][x] = None;
+                }
+            }
+        }
     }
 
     pub fn solve(&mut self) -> Result<(), ErrorNoSolution> {
@@ -169,7 +181,7 @@ impl Sudoku {
     fn points_to_digits(&self, points: &HashSet<Point<usize>>) -> HashSet<u8> {
         let mut digits = HashSet::with_capacity(points.len());
         for point in points {
-            if let Some(value) = self.get_cell(*point) {
+            if let Some(value) = self.get_cell(point.x, point.y) {
                 digits.insert(value.into());
             } else {
                 // Insert a number not from range 1-9 for empty cells
