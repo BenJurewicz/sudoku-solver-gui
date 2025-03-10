@@ -39,7 +39,7 @@ pub fn Controls(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>, m
             class: "flex justify-center flex-wrap m-2 md:m-4 lg:m-6",
 
             button {
-                class: "transition text-xl bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-2 px-3 m-2 border-solid border-green-800 border-2 rounded-lg",
+                class: "transition text-xl bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold py-2 px-3 m-2 border-solid border-emerald-800 border-2 rounded-lg",
                 onclick: move |_| {
                     board.set(Sudoku::new_puzzle(60));
                 },
@@ -47,7 +47,7 @@ pub fn Controls(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>, m
             }
 
             button {
-                class: "transition text-xl bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-2 px-4 m-2 border-solid border-blue-800 border-2 rounded-lg",
+                class: "transition text-xl bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-bold py-2 px-4 m-2 border-solid border-sky-800 border-2 rounded-lg",
                 onclick: move |_| {
                     if let Err(e) = board.write().solve() {
                         message.write().set(MessageState::Error);
@@ -59,7 +59,7 @@ pub fn Controls(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>, m
             }
 
             button {
-                class: "transition text-xl bg-red-500 hover:bg-red-600 active:bg-red-700 text-white font-bold py-2 px-4 m-2 border-solid border-red-800 border-2 rounded-lg",
+                class: "transition text-xl bg-red-400 hover:bg-red-700 active:bg-red-800 text-white font-bold py-2 px-4 m-2 border-solid border-red-900 border-2 rounded-lg",
                 onclick: move |_| {
                     message.write().set(MessageState::None);
                     board.write().clear();
