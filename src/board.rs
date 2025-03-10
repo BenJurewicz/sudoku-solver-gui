@@ -1,11 +1,11 @@
 use dioxus::prelude::*;
 use dioxus_logger::tracing::info;
-
+use crate::message::Message;
 use crate::sudoku::Sudoku;
 use crate::tile::Tile;
 
 #[component]
-pub fn Board(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>) -> Element {
+pub fn Board(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>, message: Signal<Message>) -> Element {
     rsx! {
         table {
         class: "border-collapse border-solid border-3 border-black",
@@ -18,6 +18,7 @@ pub fn Board(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>) -> E
                     Tile {
                         board: board,
                         focused: focused,
+                        message: message,
                         x: x,
                         y: y,
                     }}

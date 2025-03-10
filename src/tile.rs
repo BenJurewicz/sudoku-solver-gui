@@ -1,18 +1,31 @@
 use std::num::NonZeroU8;
 use dioxus::prelude::*;
 use dioxus_logger::tracing::info;
-
+use crate::message::{Message, MessageState};
 use crate::sudoku::Sudoku;
 
 #[component]
-pub fn Tile(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>, x: usize, y: usize) -> Element {
+pub fn Tile(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>, message: Signal<Message>, x: usize, y: usize) -> Element {
     let handleInput = move |e : KeyboardEvent| {
         if let Key::Character(c) = e.key() {
             let num =
                 c.parse::<u8>().ok()
-                .and_then(|n| if n == 0 { None } else { Some(NonZeroU8::new(n).unwrap()) });
+                .and_then(|n|
+                    if n == 0 {
+                        None
+                    } else {
+                        Some(NonZeroU8::new(n).unwrap())
+                    });
+
             board.write().set_cell(x, y, num);
+            if(board.read().check()){
+                message.write().set(MessageState::Solved);
+            }
             // needs_update(); // was needed before, keeping commented out coz it's hard to find in docs
+        } else {
+            // Any key clears
+            // It's here mainly for the backspace key to delete the value
+            board.write().set_cell(x, y, None);
         }
     };
 
