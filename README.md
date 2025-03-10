@@ -17,3 +17,9 @@ Run the following command in the root of the project to start the Dioxus dev ser
 ```bash
 dx serve --hot-reload=true --platform desktop
 ```
+
+Needed if you want to deploy to the web:
+
+```bash
+export RUSTFLAGS='--cfg getrandom_backend="wasm_js"'
+```

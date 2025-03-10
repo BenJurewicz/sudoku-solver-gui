@@ -12,6 +12,7 @@ dioxus-logger = "0.6.2"
 dioxus = { version = "0.6.2" }
 log = "0.4.25"
 rand = "0.9.0"
+getrandom = { version = "0.3", features = ["wasm_js"] }
 
 [features]
 default = ["desktop"]

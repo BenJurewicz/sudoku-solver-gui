@@ -4,6 +4,8 @@
 name = "sudoku-solver"
 
 [web.app]
+# Uncomment when deploying to web
+#base_path = "/sudoku"
 
 # HTML title tag content
 title = "sudoku-solver"
