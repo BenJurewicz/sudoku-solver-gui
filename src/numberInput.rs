@@ -9,13 +9,13 @@ use std::num::NonZeroU8;
 pub fn NumberInput(board: Signal<Sudoku>, focused: Signal<Option<(usize, usize)>>, message: Signal<Message>) -> Element {
     rsx! {
         div {
-            class: "grid grid-cols-3 gap-0.5 mx-2",
+            class: "grid grid-cols-3 gap-[5%] mx-10 size-40 md:size-50 max-w justify-center items-center",
             for i in 1..=9 {
                 button {
                     disabled: focused.read().is_none(),
-                    class: "transition w-11 text-xl bg-gray-500 text-white font-bold py-2 px-3 m-1 border-solid border-gray-800 border-2 rounded-lg \
+                    class: "transition text-3xl md:text-4xl aspect-square bg-gray-500 text-white font-bold border-solid border-gray-800 border-2 rounded-lg \
                             enabled:hover:bg-gray-600 enabled:active:bg-gray-700 \
-                            disabled:opacity-50",
+                            disabled:opacity-40",
                     onclick: move |_| {
                         let selected = focused.read().clone();
                         if let Some((fx, fy)) = selected {

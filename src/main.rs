@@ -20,6 +20,7 @@ use crate::message::{Message, MessageState};
 use crate::numberInput::NumberInput;
 
 const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
+const GITHUB_LOGO: Asset = asset!("/assets/github-mark.svg");
 
 fn main() {
     dioxus::launch(App);
@@ -33,29 +34,40 @@ fn App() -> Element {
 
     rsx! {
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
-
-        div {
+        body {
             onclick: move |_| {
                 focused.set(None);
             },
-            class: "flex flex-wrap flex-col justify-center items-center h-screen",
-            div {
-            class: "flex justify-center items-center flex-col",
-                Board {
-                    board: board,
-                    focused: focused,
-                    message: message,
+            a {
+                href: "https://github.com/BenJurewicz/sudoku-solver-gui",
+                class: "block text-center underline hover:opacity-50 active:opacity-30 visited:opacity-70",
+                img {
+                    src: GITHUB_LOGO,
+                    alt: "Github logo",
+                    class: "inline size-3.5 mx-1"
                 }
-                Controls {
-                    board: board,
-                    focused: focused,
-                    message: message,
-                }
+               "github.com/BenJurewicz/sudoku-solver-gui"
             }
-            NumberInput {
-                board: board,
-                focused: focused,
-                message: message,
+            div {
+                class: "flex flex-wrap portrait:flex-col landscape:flex-row justify-center items-center h-screen",
+                div {
+                class: "flex justify-center items-center flex-col",
+                    Board {
+                        board: board,
+                        focused: focused,
+                        message: message,
+                    }
+                    Controls {
+                        board: board,
+                        focused: focused,
+                        message: message,
+                    }
+                }
+                NumberInput {
+                    board: board,
+                    focused: focused,
+                    message: message,
+                }
             }
         }
     }
