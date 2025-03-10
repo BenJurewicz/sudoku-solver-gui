@@ -18,8 +18,9 @@ Run the following command in the root of the project to start the Dioxus dev ser
 dx serve --hot-reload=true --platform desktop
 ```
 
-Needed if you want to deploy to the web:
-
+Needed if you want to deploy to the web: \
+**Remember to uncomment the line `base_path = "/sudoku"` in `Dioxus.toml` file** \
+(Random crate needs wasm backend to be enabled explicitly to use it)
 ```bash
-export RUSTFLAGS='--cfg getrandom_backend="wasm_js"'
+RUSTFLAGS='--cfg getrandom_backend="wasm_js"' dx bundle --platform web --out-dir sudoku-web-app
 ```
