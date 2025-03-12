@@ -63,7 +63,7 @@ pub fn Tile(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>, messa
             // We want the board to take up around 2/3 of the screen and sudoku grid is 9x9 so:
             // x * 9 / 100 = 2/3
             // x = 7,4 ≈ 2/3 * 100/9
-            class: format!("size-[9vmin] sm:size-[7.4vmin] text-[6vmin] md:text-[4.5vmin] lg:text-[3vmin] text-center select-none cursor-pointer {} {}",
+            class: format!("size-[9vmin] sm:size-[7.4vmin] text-[6vmin] md:text-[4.5vmin] lg:text-[3vmin] flex justify-center items-center select-none cursor-pointer {} {}",
                 if is_read_only && !is_focused {"bg-zinc-600 text-white font-bold"}
                 else if is_read_only && is_focused {"bg-zinc-700 text-white font-bold"}
                 else if is_focused {"bg-gray-400 font-semibold"}
