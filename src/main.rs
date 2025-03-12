@@ -28,7 +28,7 @@ fn main() {
 
 #[component]
 fn App() -> Element {
-    let mut board = use_signal(|| Sudoku::new_puzzle(60));
+    let mut board = use_signal(|| Sudoku::new_puzzle(40));
     let mut focused = use_signal(|| None::<(usize, usize)>);
     let mut message = use_signal(|| Message::new());
 
@@ -40,7 +40,7 @@ fn App() -> Element {
             },
             a {
                 href: "https://github.com/BenJurewicz/sudoku-solver-gui",
-                class: "block text-center underline hover:opacity-50 active:opacity-30 visited:opacity-70",
+                class: "block m-2.5 text-center underline hover:opacity-50 active:opacity-30 visited:opacity-70",
                 img {
                     src: GITHUB_LOGO,
                     alt: "Github logo",

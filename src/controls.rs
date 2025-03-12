@@ -41,7 +41,7 @@ pub fn Controls(board: Signal<Sudoku>, focused:Signal<Option<(usize, usize)>>, m
             button {
                 class: "transition text-xl bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold py-2 px-3 m-2 border-solid border-emerald-800 border-2 rounded-lg",
                 onclick: move |_| {
-                    board.set(Sudoku::new_puzzle(60));
+                    board.set(Sudoku::new_puzzle(40));
                 },
                 "New"
             }
