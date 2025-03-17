@@ -13,3 +13,5 @@
 
 # Contains node modules (tailwindcss, tailwindcss-cli)
 /node_modules/
+
+**/.DS_Store
